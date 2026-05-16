@@ -1,150 +1,150 @@
-# 🔧 Guide de Dépannage BobSpec
+# 🔧 BobSpec Troubleshooting Guide
 
-## Problème : L'application ne retourne pas de résultats
+## Problem: Application Returns No Results
 
-### Diagnostic
+### Diagnosis
 
-Si l'application ne fonctionne pas correctement, cela peut être dû à :
+If the application is not working properly, it may be due to:
 
-1. **Problème de connexion watsonx.ai** - Les credentials sont invalides ou l'API est inaccessible
-2. **Problème de configuration** - Le fichier `.env` est mal configuré
-3. **Problème réseau** - Impossible de contacter l'API IBM
+1. **watsonx.ai Connection Issue** - Invalid credentials or API is unreachable
+2. **Configuration Problem** - `.env` file is misconfigured
+3. **Network Issue** - Unable to contact IBM API
 
-### Solution : Mode Test avec Données Mockées
+### Solution: Test Mode with Mock Data
 
-BobSpec inclut un **mode de test** qui utilise des données d'exemple au lieu de l'API watsonx.ai. Cela permet de tester l'application même sans credentials valides.
+BobSpec includes a **test mode** that uses sample data instead of the watsonx.ai API. This allows testing the application even without valid credentials.
 
-#### Activer le Mode Test
+#### Enable Test Mode
 
-Éditez le fichier `.env` et changez :
+Edit the `.env` file and change:
 
 ```env
 USE_MOCK_DATA=true
 ```
 
-Au lieu de :
+Instead of:
 
 ```env
 USE_MOCK_DATA=false
 ```
 
-#### Redémarrer le Backend
+#### Restart Backend
 
 ```bash
-# Arrêter le serveur (CTRL+C)
-# Puis relancer
+# Stop the server (CTRL+C)
+# Then restart
 .\venv\Scripts\Activate.ps1
 python backend/app.py
 ```
 
-### Comportement en Mode Test
+### Behavior in Test Mode
 
-Avec `USE_MOCK_DATA=true`, les 3 agents retournent des données d'exemple réalistes :
+With `USE_MOCK_DATA=true`, the 3 agents return realistic sample data:
 
-**Edge Case Agent** retourne 4 cas limites :
-- Email déjà existant
-- Tentatives de connexion multiples
-- Token expiré
-- Email temporaire
+**Edge Case Agent** returns 4 edge cases:
+- Email already exists
+- Multiple failed login attempts
+- Expired token
+- Temporary email
 
-**Security Agent** retourne 5 risques :
-- Stockage mot de passe en clair
-- Attaques par force brute
-- Injection SQL
-- Tokens non sécurisés
-- Non-conformité RGPD
+**Security Agent** returns 5 risks:
+- Plain text password storage
+- Brute force attacks
+- SQL injection
+- Unsecured tokens
+- GDPR non-compliance
 
-**Architect Agent** retourne :
-- 5 composants techniques
-- 7 endpoints API
-- 10 étapes d'implémentation
-- Complexité : L (Large)
-- Estimation : 8 jours
+**Architect Agent** returns:
+- 5 technical components
+- 7 API endpoints
+- 10 implementation steps
+- Complexity: L (Large)
+- Estimation: 8 days
 
-### Comportement en Mode Production
+### Behavior in Production Mode
 
-Avec `USE_MOCK_DATA=false`, les agents utilisent watsonx.ai :
+With `USE_MOCK_DATA=false`, agents use watsonx.ai:
 
-- Si l'API fonctionne → Résultats réels de l'IA
-- Si l'API échoue → Fallback automatique sur les données mockées
+- If API works → Real AI results
+- If API fails → Automatic fallback to mock data
 
-**Avantage** : L'application fonctionne toujours, même en cas de problème API !
+**Advantage**: Application always works, even with API issues!
 
 ---
 
-## Vérification des Credentials watsonx.ai
+## watsonx.ai Credentials Verification
 
-### Fichier .env Requis
+### Required .env File
 
 ```env
-WATSONX_API_KEY=votre_clé_api_ici
-WATSONX_PROJECT_ID=votre_project_id_ici
+WATSONX_API_KEY=your_api_key_here
+WATSONX_PROJECT_ID=your_project_id_here
 WATSONX_URL=https://us-south.ml.cloud.ibm.com
 WATSONX_MODEL_ID=ibm/granite-4-h-small
 USE_MOCK_DATA=false
 ```
 
-### Tester les Credentials
+### Test Credentials
 
 ```bash
-# Activer venv
+# Activate venv
 .\venv\Scripts\Activate.ps1
 
-# Tester la connexion
+# Test connection
 python -c "from backend.utils.watsonx_client import get_iam_token; print(get_iam_token())"
 ```
 
-Si cela affiche un token, vos credentials sont valides.
+If this displays a token, your credentials are valid.
 
 ---
 
-## Problèmes Courants
+## Common Issues
 
-### 1. Backend ne démarre pas
+### 1. Backend Won't Start
 
-**Erreur** : `ModuleNotFoundError: No module named 'flask'`
+**Error**: `ModuleNotFoundError: No module named 'flask'`
 
-**Solution** :
+**Solution**:
 ```bash
 .\venv\Scripts\Activate.ps1
 pip install -r backend/requirements.txt
 ```
 
-### 2. Frontend ne se connecte pas au backend
+### 2. Frontend Cannot Connect to Backend
 
-**Erreur** : `CORS error` ou `Network error`
+**Error**: `CORS error` or `Network error`
 
-**Vérifications** :
-- Backend tourne sur http://localhost:5000
-- Frontend tourne sur http://localhost:3000
-- Flask-CORS est installé
+**Checks**:
+- Backend running on http://localhost:5000
+- Frontend running on http://localhost:3000
+- Flask-CORS is installed
 
-**Solution** :
+**Solution**:
 ```bash
 pip install flask-cors
 ```
 
-### 3. Agents retournent des erreurs vides
+### 3. Agents Return Empty Errors
 
-**Symptôme** : Les cartes d'agents s'affichent mais sans résultats
+**Symptom**: Agent cards display but without results
 
-**Solution** : Activer le mode test
+**Solution**: Enable test mode
 ```env
 USE_MOCK_DATA=true
 ```
 
-### 4. Erreur "Python not found"
+### 4. Error "Python not found"
 
-**Solution** : Utiliser Python 3.11 explicitement
+**Solution**: Use Python 3.11 explicitly
 ```bash
 py -3.11 -m venv venv
 ```
 
 ---
 
-## Logs de Débogage
+## Debug Logs
 
-Les agents affichent des messages dans la console backend :
+Agents display messages in backend console:
 
 ```
 🔧 Using mock data for Edge Case Agent
@@ -152,7 +152,7 @@ Les agents affichent des messages dans la console backend :
 🔧 Using mock data for Architect Agent
 ```
 
-Ou en cas d'erreur :
+Or in case of error:
 
 ```
 ⚠️ JSON parse error, falling back to mock data: ...
@@ -161,32 +161,32 @@ Ou en cas d'erreur :
 
 ---
 
-## Mode Recommandé pour le Hackathon
+## Recommended Mode for Hackathon
 
-Pour la démo du hackathon, nous recommandons :
+For hackathon demo, we recommend:
 
 ```env
 USE_MOCK_DATA=true
 ```
 
-**Pourquoi ?**
-- ✅ Résultats instantanés (pas d'attente API)
-- ✅ Pas de dépendance réseau
-- ✅ Données cohérentes et impressionnantes
-- ✅ Zéro risque de quota API dépassé
+**Why?**
+- ✅ Instant results (no API wait)
+- ✅ No network dependency
+- ✅ Consistent and impressive data
+- ✅ Zero risk of API quota exceeded
 
-Vous pouvez toujours montrer que l'intégration watsonx.ai fonctionne en changeant à `false` pendant la démo.
+You can still show watsonx.ai integration works by changing to `false` during demo.
 
 ---
 
 ## Support
 
-Si le problème persiste :
+If problem persists:
 
-1. Vérifier les logs du backend (terminal 1)
-2. Vérifier la console du navigateur (F12)
-3. Tester avec `USE_MOCK_DATA=true`
-4. Consulter [`START.md`](START.md) pour le guide complet
+1. Check backend logs (terminal 1)
+2. Check browser console (F12)
+3. Test with `USE_MOCK_DATA=true`
+4. Consult [`START.md`](START.md) for complete guide
 
 ---
 

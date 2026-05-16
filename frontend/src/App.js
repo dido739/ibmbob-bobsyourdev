@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TicketInput from './components/TicketInput';
 import AgentCard from './components/AgentCard';
+import ConnectorLine from './components/ConnectorLine';
 import SpecOutput from './components/SpecOutput';
 import './styles/variables.css';
 import './App.css';
@@ -36,7 +37,7 @@ function App() {
     setIsAnalyzing(true);
     setResults(null);
     
-    // Activate agents with stagger
+    // Staggered activation: 200ms delay between each agent
     setTimeout(() => setAgentStatuses({ edge: 'active', security: 'idle', architect: 'idle' }), 200);
     setTimeout(() => setAgentStatuses({ edge: 'active', security: 'active', architect: 'idle' }), 400);
     setTimeout(() => setAgentStatuses({ edge: 'active', security: 'active', architect: 'active' }), 600);
@@ -55,8 +56,23 @@ function App() {
       }
 
       const data = await response.json();
-      setResults(data);
-      setAgentStatuses({ edge: 'done', security: 'done', architect: 'done' });
+      
+      // Simulate staggered completion for better UX
+      // In reality, all agents finish together, but we show them completing one by one
+      setTimeout(() => {
+        setAgentStatuses(prev => ({ ...prev, edge: 'done' }));
+      }, 100);
+      
+      setTimeout(() => {
+        setAgentStatuses(prev => ({ ...prev, security: 'done' }));
+      }, 300);
+      
+      setTimeout(() => {
+        setAgentStatuses(prev => ({ ...prev, architect: 'done' }));
+        // Show results after all agents are done
+        setTimeout(() => setResults(data), 300);
+      }, 500);
+      
     } catch (error) {
       console.error('Error analyzing ticket:', error);
       setAgentStatuses({ edge: 'error', security: 'error', architect: 'error' });
@@ -91,6 +107,11 @@ function App() {
               />
             ))}
           </div>
+          
+          {/* Connector line between agents */}
+          {(isAnalyzing || results) && (
+            <ConnectorLine agentStatuses={agentStatuses} />
+          )}
         </div>
 
         {results && <SpecOutput results={results} />}

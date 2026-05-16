@@ -7,24 +7,24 @@ def get_mock_edge_cases():
     return {
         "edge_cases": [
             {
-                "scenario": "Utilisateur tente de s'inscrire avec un email déjà existant",
+                "scenario": "User attempts to register with an existing email",
                 "criticality": "HIGH",
-                "question_for_po": "Quel message d'erreur afficher ? Doit-on suggérer la récupération de mot de passe ?"
+                "question_for_po": "What error message should be displayed? Should we suggest password recovery?"
             },
             {
-                "scenario": "Tentatives de connexion multiples échouées",
+                "scenario": "Multiple failed login attempts",
                 "criticality": "CRITICAL",
-                "question_for_po": "Après combien de tentatives bloquer le compte ? Quelle est la durée du blocage ?"
+                "question_for_po": "After how many attempts should the account be locked? What is the lockout duration?"
             },
             {
-                "scenario": "Token de réinitialisation expiré",
+                "scenario": "Expired password reset token",
                 "criticality": "MEDIUM",
-                "question_for_po": "Quelle est la durée de validité du token ? 15 min, 1h, 24h ?"
+                "question_for_po": "What is the token validity duration? 15 min, 1h, 24h?"
             },
             {
-                "scenario": "Email temporaire ou jetable utilisé",
+                "scenario": "Temporary or disposable email used",
                 "criticality": "MEDIUM",
-                "question_for_po": "Doit-on bloquer les emails temporaires (10minutemail, etc.) ?"
+                "question_for_po": "Should we block temporary emails (10minutemail, etc.)?"
             }
         ]
     }
@@ -34,34 +34,34 @@ def get_mock_security():
     return {
         "security_risks": [
             {
-                "vulnerability": "Stockage des mots de passe en clair",
+                "vulnerability": "Plain text password storage",
                 "risk_level": "CRITICAL",
                 "standard": "OWASP A02:2021",
-                "mitigation": "Utiliser bcrypt avec un salt de 12+ rounds pour hasher les mots de passe"
+                "mitigation": "Use bcrypt with a salt of 12+ rounds to hash passwords"
             },
             {
-                "vulnerability": "Absence de protection contre les attaques par force brute",
+                "vulnerability": "No protection against brute force attacks",
                 "risk_level": "HIGH",
                 "standard": "OWASP A07:2021",
-                "mitigation": "Implémenter un rate limiting (ex: 5 tentatives max par 15 min) et CAPTCHA après 3 échecs"
+                "mitigation": "Implement rate limiting (e.g., 5 attempts max per 15 min) and CAPTCHA after 3 failures"
             },
             {
-                "vulnerability": "Injection SQL potentielle sur les champs email/password",
+                "vulnerability": "Potential SQL injection on email/password fields",
                 "risk_level": "CRITICAL",
                 "standard": "OWASP A03:2021",
-                "mitigation": "Utiliser des requêtes préparées (prepared statements) et valider/sanitiser toutes les entrées"
+                "mitigation": "Use prepared statements and validate/sanitize all inputs"
             },
             {
-                "vulnerability": "Tokens de session non sécurisés",
+                "vulnerability": "Unsecured session tokens",
                 "risk_level": "HIGH",
                 "standard": "OWASP A01:2021",
-                "mitigation": "Utiliser JWT avec signature HMAC-SHA256, expiration courte (15min) et refresh tokens"
+                "mitigation": "Use JWT with HMAC-SHA256 signature, short expiration (15min) and refresh tokens"
             },
             {
-                "vulnerability": "Données personnelles non conformes RGPD",
+                "vulnerability": "Personal data not GDPR compliant",
                 "risk_level": "HIGH",
                 "standard": "GDPR",
-                "mitigation": "Obtenir consentement explicite, permettre export/suppression des données, chiffrer les données sensibles"
+                "mitigation": "Obtain explicit consent, allow data export/deletion, encrypt sensitive data"
             }
         ]
     }
@@ -71,33 +71,33 @@ def get_mock_architecture():
     return {
         "architecture": {
             "components": [
-                "API REST (Flask/FastAPI)",
-                "Base de données PostgreSQL",
-                "Service d'envoi d'emails (SendGrid/AWS SES)",
-                "Cache Redis pour les sessions",
-                "Service de validation d'emails"
+                "REST API (Flask/FastAPI)",
+                "PostgreSQL database",
+                "Email service (SendGrid/AWS SES)",
+                "Redis cache for sessions",
+                "Email validation service"
             ],
             "complexity": "L",
             "endpoints": [
-                "POST /api/auth/register - Inscription utilisateur",
-                "POST /api/auth/login - Connexion utilisateur",
-                "POST /api/auth/logout - Déconnexion",
-                "POST /api/auth/forgot-password - Demande de réinitialisation",
-                "POST /api/auth/reset-password - Réinitialisation avec token",
-                "GET /api/auth/verify-email - Vérification email",
-                "POST /api/auth/refresh-token - Renouvellement du token"
+                "POST /api/auth/register - User registration",
+                "POST /api/auth/login - User login",
+                "POST /api/auth/logout - Logout",
+                "POST /api/auth/forgot-password - Password reset request",
+                "POST /api/auth/reset-password - Password reset with token",
+                "GET /api/auth/verify-email - Email verification",
+                "POST /api/auth/refresh-token - Token refresh"
             ],
             "implementation_order": [
-                "1. Créer le modèle User en base de données avec champs (id, email, password_hash, created_at, verified)",
-                "2. Implémenter l'endpoint d'inscription avec validation email et hashing bcrypt",
-                "3. Créer le système de tokens JWT (access + refresh tokens)",
-                "4. Implémenter l'endpoint de connexion avec vérification du hash",
-                "5. Ajouter le rate limiting sur les endpoints sensibles",
-                "6. Implémenter le système de réinitialisation de mot de passe avec tokens temporaires",
-                "7. Créer le service d'envoi d'emails pour les confirmations",
-                "8. Ajouter la vérification d'email à l'inscription",
-                "9. Implémenter la déconnexion avec invalidation des tokens",
-                "10. Ajouter les tests unitaires et d'intégration"
+                "1. Create User model in database with fields (id, email, password_hash, created_at, verified)",
+                "2. Implement registration endpoint with email validation and bcrypt hashing",
+                "3. Create JWT token system (access + refresh tokens)",
+                "4. Implement login endpoint with hash verification",
+                "5. Add rate limiting on sensitive endpoints",
+                "6. Implement password reset system with temporary tokens",
+                "7. Create email service for confirmations",
+                "8. Add email verification to registration",
+                "9. Implement logout with token invalidation",
+                "10. Add unit and integration tests"
             ],
             "estimated_days": 8
         }

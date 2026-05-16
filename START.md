@@ -1,21 +1,21 @@
-# 🚀 Guide de Démarrage BobSpec
+# 🚀 BobSpec Getting Started Guide
 
-## Prérequis
-- Python 3.11 installé
-- Node.js et npm installés
-- Credentials IBM watsonx.ai (API Key, Project ID)
+## Prerequisites
+- Python 3.11 installed
+- Node.js and npm installed
+- IBM watsonx.ai credentials (API Key, Project ID)
 
 ---
 
-## 📋 Étape 1 : Configuration de l'environnement virtuel Python
+## 📋 Step 1: Python Virtual Environment Setup
 
-### Créer l'environnement virtuel
+### Create Virtual Environment
 ```bash
-# Créer un environnement virtuel avec Python 3.11
+# Create a virtual environment with Python 3.11
 py -3.11 -m venv venv
 ```
 
-### Activer l'environnement virtuel
+### Activate Virtual Environment
 
 **Windows (PowerShell):**
 ```bash
@@ -32,41 +32,41 @@ venv\Scripts\activate.bat
 source venv/bin/activate
 ```
 
-Vous devriez voir `(venv)` apparaître au début de votre ligne de commande.
+You should see `(venv)` appear at the beginning of your command line.
 
 ---
 
-## 🔧 Étape 2 : Configuration des credentials
+## 🔧 Step 2: Credentials Configuration
 
-### Créer le fichier .env
+### Create .env File
 ```bash
-# Copier le template
+# Copy the template
 copy .env.example .env
 ```
 
-### Éditer .env avec vos credentials watsonx
-Ouvrir `.env` et remplir :
+### Edit .env with Your watsonx Credentials
+Open `.env` and fill in:
 ```env
-WATSONX_API_KEY=votre_api_key_ici
-WATSONX_PROJECT_ID=votre_project_id_ici
+WATSONX_API_KEY=your_api_key_here
+WATSONX_PROJECT_ID=your_project_id_here
 WATSONX_URL=https://us-south.ml.cloud.ibm.com
 WATSONX_MODEL_ID=ibm/granite-4-h-small
 ```
 
 ---
 
-## 📦 Étape 3 : Installation des dépendances
+## 📦 Step 3: Dependencies Installation
 
-### Backend (avec environnement virtuel activé)
+### Backend (with activated virtual environment)
 ```bash
-# S'assurer que l'environnement virtuel est activé (venv)
-# Vous devriez voir (venv) au début de votre ligne de commande
+# Make sure virtual environment is activated (venv)
+# You should see (venv) at the beginning of your command line
 
-# Installer les dépendances Python depuis requirements.txt
+# Install Python dependencies from requirements.txt
 pip install -r backend/requirements.txt
 ```
 
-**⚠️ IMPORTANT:** Vous DEVEZ installer les dépendances depuis `backend/requirements.txt` qui contient :
+**⚠️ IMPORTANT:** You MUST install dependencies from `backend/requirements.txt` which contains:
 - flask
 - flask-cors
 - requests
@@ -74,167 +74,167 @@ pip install -r backend/requirements.txt
 
 ### Frontend
 ```bash
-# Aller dans le dossier frontend
+# Navigate to frontend directory
 cd frontend
 
-# Installer les dépendances npm
+# Install npm dependencies
 npm install
 
-# Retourner à la racine
+# Return to root
 cd ..
 ```
 
 ---
 
-## ▶️ Étape 4 : Démarrer le projet
+## ▶️ Step 4: Start the Project
 
 ### Terminal 1 - Backend (Flask)
 ```bash
-# Activer l'environnement virtuel si pas déjà fait
+# Activate virtual environment if not already done
 .\venv\Scripts\Activate.ps1
 
-# Lancer le serveur Flask sur le port 5000
+# Start Flask server on port 5000
 python backend/app.py
 ```
 
-Vous devriez voir :
+You should see:
 ```
  * Running on http://127.0.0.1:5000
 ```
 
 ### Terminal 2 - Frontend (React)
 ```bash
-# Aller dans frontend
+# Navigate to frontend
 cd frontend
 
-# Lancer le serveur de développement React
+# Start React development server
 npm start
 ```
 
-Le navigateur s'ouvrira automatiquement sur `http://localhost:3000`
+Browser will automatically open at `http://localhost:3000`
 
 ---
 
-## ✅ Vérification
+## ✅ Verification
 
-1. **Backend** : Ouvrir `http://localhost:5000` dans le navigateur
-   - Vous devriez voir un message JSON avec les endpoints disponibles
+1. **Backend**: Open `http://localhost:5000` in browser
+   - You should see a JSON message with available endpoints
 
-2. **Frontend** : Ouvrir `http://localhost:3000`
-   - Vous devriez voir l'interface BobSpec avec le champ de saisie du ticket
+2. **Frontend**: Open `http://localhost:3000`
+   - You should see the BobSpec interface with ticket input field
 
 ---
 
-## 🧪 Test rapide
+## 🧪 Quick Test
 
-1. Coller un ticket de test dans le textarea :
+1. Paste a test ticket in the textarea:
 ```
-Créer un système d'authentification utilisateur avec email et mot de passe.
-Les utilisateurs doivent pouvoir se connecter, se déconnecter et réinitialiser leur mot de passe.
+Create a user authentication system with email and password.
+Users should be able to login, logout, and reset their password.
 ```
 
-2. Cliquer sur "Analyze with BobSpec"
+2. Click "Analyze with BobSpec"
 
-3. Observer les 3 agents s'activer en parallèle
+3. Watch the 3 agents activate in parallel
 
-4. Consulter les résultats dans les onglets Edge Cases, Security, Architecture
+4. View results in Edge Cases, Security, Architecture tabs
 
 ---
 
-## 🐛 Dépannage
+## 🐛 Troubleshooting
 
-### Erreur "venv not activated"
+### Error "venv not activated"
 ```bash
 # Windows PowerShell
 .\venv\Scripts\Activate.ps1
 
-# Si erreur de politique d'exécution
+# If execution policy error
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-### Erreur "Python not found"
-- Vérifier que Python 3.11 est installé : `py -3.11 --version`
-- Recréer l'environnement virtuel : `py -3.11 -m venv venv`
+### Error "Python not found"
+- Check Python 3.11 is installed: `py -3.11 --version`
+- Recreate virtual environment: `py -3.11 -m venv venv`
 
-### Erreur "Module not found"
+### Error "Module not found"
 ```bash
-# Activer venv puis réinstaller
+# Activate venv then reinstall
 .\venv\Scripts\Activate.ps1
 pip install --upgrade -r backend/requirements.txt
 ```
 
-### Erreur CORS (frontend ne peut pas contacter backend)
-- Vérifier que Flask-CORS est installé
-- Vérifier que le backend tourne sur le port 5000
-- Vérifier l'URL dans [`App.js`](frontend/src/App.js:45) : `http://localhost:5000/api/analyze`
+### CORS Error (frontend cannot contact backend)
+- Verify Flask-CORS is installed
+- Verify backend is running on port 5000
+- Check URL in [`App.js`](frontend/src/App.js:45): `http://localhost:5000/api/analyze`
 
-### Erreur watsonx.ai
-- Vérifier que le fichier `.env` existe et contient les bonnes credentials
-- Vérifier que `WATSONX_API_KEY` est valide
-- Vérifier que `WATSONX_PROJECT_ID` est correct
+### watsonx.ai Error
+- Verify `.env` file exists and contains correct credentials
+- Verify `WATSONX_API_KEY` is valid
+- Verify `WATSONX_PROJECT_ID` is correct
 
 ---
 
-## 📁 Structure du projet
+## 📁 Project Structure
 
 ```
 bobspec/
-├── venv/                # Environnement virtuel Python (ignoré par git)
-├── backend/             # Serveur Flask Python 3.11
-│   ├── app.py          # Point d'entrée
-│   ├── routes/         # Routes API
-│   ├── agents/         # 3 agents IA
-│   └── utils/          # Client watsonx
+├── venv/                # Python virtual environment (ignored by git)
+├── backend/             # Flask Python 3.11 server
+│   ├── app.py          # Entry point
+│   ├── routes/         # API routes
+│   ├── agents/         # 3 AI agents
+│   └── utils/          # watsonx client
 │
-├── frontend/           # Application React
+├── frontend/           # React application
 │   ├── src/
-│   │   ├── components/ # Composants UI
-│   │   └── styles/     # CSS IBM Carbon
+│   │   ├── components/ # UI components
+│   │   └── styles/     # IBM Carbon CSS
 │   └── package.json
 │
-├── .env                # Configuration (NE PAS COMMIT)
-├── .env.example        # Template de configuration
-└── README.md           # Documentation complète
+├── .env                # Configuration (DO NOT COMMIT)
+├── .env.example        # Configuration template
+└── README.md           # Complete documentation
 ```
 
 ---
 
-## 🎯 Commandes utiles
+## 🎯 Useful Commands
 
 ```bash
-# Environnement virtuel
-py -3.11 -m venv venv                # Créer venv
-.\venv\Scripts\Activate.ps1          # Activer (Windows PowerShell)
-deactivate                            # Désactiver
+# Virtual environment
+py -3.11 -m venv venv                # Create venv
+.\venv\Scripts\Activate.ps1          # Activate (Windows PowerShell)
+deactivate                            # Deactivate
 
-# Backend (avec venv activé)
-python backend/app.py                 # Démarrer le serveur Flask
-pip list                              # Voir les packages installés
-pip freeze > requirements.txt         # Mettre à jour requirements.txt
+# Backend (with venv activated)
+python backend/app.py                 # Start Flask server
+pip list                              # View installed packages
+pip freeze > requirements.txt         # Update requirements.txt
 
 # Frontend
 cd frontend
-npm start                             # Démarrer React en mode dev
-npm run build                         # Build pour production
-npm test                              # Lancer les tests
+npm start                             # Start React in dev mode
+npm run build                         # Build for production
+npm test                              # Run tests
 
-# Vérifications
-py -3.11 --version                   # Version Python
-python --version                      # Version Python (dans venv)
-node --version                        # Version Node.js
-npm --version                         # Version npm
+# Verifications
+py -3.11 --version                   # Python version
+python --version                      # Python version (in venv)
+node --version                        # Node.js version
+npm --version                         # npm version
 ```
 
 ---
 
-## 💡 Bonnes pratiques
+## 💡 Best Practices
 
-1. **Toujours activer l'environnement virtuel** avant de travailler sur le backend
-2. **Ne jamais commit le dossier `venv/`** (déjà dans .gitignore)
-3. **Ne jamais commit le fichier `.env`** (contient les credentials)
-4. **Mettre à jour `requirements.txt`** après installation de nouveaux packages
-5. **Exporter les sessions Bob** dans `bob_sessions/` après chaque tâche majeure
+1. **Always activate virtual environment** before working on backend
+2. **Never commit `venv/` directory** (already in .gitignore)
+3. **Never commit `.env` file** (contains credentials)
+4. **Update `requirements.txt`** after installing new packages
+5. **Export Bob sessions** to `bob_sessions/` after each major task
 
 ---
 
-**Prêt à transformer vos tickets en spécifications complètes ! 🚀**
+**Ready to transform your tickets into complete specifications! 🚀**

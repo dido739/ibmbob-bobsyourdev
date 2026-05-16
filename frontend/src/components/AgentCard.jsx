@@ -9,9 +9,9 @@ const AgentCard = ({ agent, status, results }) => {
       case 'active':
         return <span className="pulse-dot">◉</span>;
       case 'done':
-        return '✓';
+        return <span className="checkmark-icon">✓</span>;
       case 'error':
-        return '✕';
+        return <span className="error-icon">✕</span>;
       default:
         return '○';
     }
@@ -19,6 +19,21 @@ const AgentCard = ({ agent, status, results }) => {
 
   const getStatusClass = () => {
     return `agent-card agent-card--${status} agent-card--${agent.slug}`;
+  };
+
+  const getStatusText = () => {
+    switch (status) {
+      case 'idle':
+        return 'IDLE';
+      case 'active':
+        return 'THINKING';
+      case 'done':
+        return 'COMPLETE';
+      case 'error':
+        return 'ERROR';
+      default:
+        return 'IDLE';
+    }
   };
 
   return (
@@ -30,7 +45,7 @@ const AgentCard = ({ agent, status, results }) => {
       
       <div className="agent-status">
         <span className="status-icon">{getStatusIcon()}</span>
-        <span className="status-text">{status.toUpperCase()}</span>
+        <span className="status-text">{getStatusText()}</span>
       </div>
 
       {status === 'active' && (

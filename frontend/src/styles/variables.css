@@ -1,10 +1,10 @@
-/* IBM Carbon Design System Variables */
 :root {
   /* IBM Blues */
   --blue-70: #0043CE;
   --blue-60: #0F62FE;
   --blue-50: #4589FF;
   --blue-20: #A6C8FF;
+  --blue-10: #EDF5FF;
 
   /* IBM Grays */
   --gray-100: #161616;
@@ -19,6 +19,12 @@
   --purple-40: #BE95FF;
   --red-40: #FF8389;
   --green-40: #42BE65;
+
+  /* Status Colors */
+  --status-idle: #6F6F6F;
+  --status-active: #0F62FE;
+  --status-done: #42BE65;
+  --status-error: #FA4D56;
 
   /* Semantic */
   --bg-primary: var(--gray-100);
@@ -35,7 +41,9 @@
   --font-serif: 'IBM Plex Serif', serif;
 
   /* Spacing (8px base unit) */
+  --space-1: 0.25rem;
   --space-2: 0.5rem;
+  --space-3: 0.75rem;
   --space-4: 1rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
@@ -46,6 +54,232 @@
   --transition-fast: 150ms ease;
   --transition-normal: 300ms ease;
   --transition-slow: 500ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Border Radius (IBM Carbon = 0px) */
+  --border-radius: 0px;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* Agent Card Breathing Effect */
+@keyframes cardBreath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Border Glow Pulse */
+@keyframes borderGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(15, 98, 254, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(15, 98, 254, 0.4),
+                0 0 40px rgba(15, 98, 254, 0.2);
+  }
+}
+
+/* Border Glow - Purple (Edge Case) */
+@keyframes borderGlowPurple {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(190, 149, 255, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(190, 149, 255, 0.4),
+                0 0 40px rgba(190, 149, 255, 0.2);
+  }
+}
+
+/* Border Glow - Red (Security) */
+@keyframes borderGlowRed {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(255, 131, 137, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 131, 137, 0.4),
+                0 0 40px rgba(255, 131, 137, 0.2);
+  }
+}
+
+/* Border Glow - Green (Architect) */
+@keyframes borderGlowGreen {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(66, 190, 101, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(66, 190, 101, 0.4),
+                0 0 40px rgba(66, 190, 101, 0.2);
+  }
+}
+
+/* Shimmer Effect (left to right sweep) */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Thinking Dots Animation */
+@keyframes thinkingDot {
+  0%, 80%, 100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+/* Pulsing Dot */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+/* Fade In Up (for result items) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Badge Pulse (for criticality badges) */
+@keyframes badgePulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Spring In (for complexity badge) */
+@keyframes springIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Slide In Up (for spec panel) */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Draw Line (top border animation) */
+@keyframes drawLine {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Progress Fill (connector line) */
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Page Load Animation */
+@keyframes pageLoad {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Checkmark Appear */
+@keyframes checkmarkAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Error X Appear */
+@keyframes errorAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(45deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Glow Pulse for Critical Items */
+@keyframes criticalGlow {
+  0%, 100% {
+    border-left-color: var(--status-error);
+    box-shadow: -4px 0 0 rgba(250, 77, 86, 0);
+  }
+  50% {
+    border-left-color: var(--status-error);
+    box-shadow: -4px 0 8px rgba(250, 77, 86, 0.6);
+  }
 }
 
 /* Made with Bob */

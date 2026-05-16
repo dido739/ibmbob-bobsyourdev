@@ -6,80 +6,80 @@ Multi-agent system powered by IBM watsonx.ai that transforms vague development t
 
 ---
 
-## 📖 Qu'est-ce que BobSpec ?
+## 📖 What is BobSpec?
 
-BobSpec est un système intelligent qui analyse automatiquement vos tickets de développement et génère une spécification technique complète **avant même d'écrire une seule ligne de code**.
+BobSpec is an intelligent system that automatically analyzes your development tickets and generates a complete technical specification **before writing a single line of code**.
 
-### 🎯 Le Problème
+### 🎯 The Problem
 
-Les tickets de développement sont souvent :
-- ❌ Vagues et incomplets
-- ❌ Manquent de cas limites critiques
-- ❌ Ignorent les risques de sécurité
-- ❌ N'ont pas d'architecture définie
-- ❌ Causent des allers-retours entre dev et PO
+Development tickets are often:
+- ❌ Vague and incomplete
+- ❌ Missing critical edge cases
+- ❌ Ignoring security risks
+- ❌ Without defined architecture
+- ❌ Causing back-and-forth between dev and PO
 
-### ✨ La Solution BobSpec
+### ✨ The BobSpec Solution
 
-BobSpec utilise **3 agents IA spécialisés** qui travaillent en parallèle pour analyser votre ticket :
+BobSpec uses **3 specialized AI agents** working in parallel to analyze your ticket:
 
-1. **🔍 Edge Case Detective** - Identifie tous les cas limites oubliés
-2. **🛡️ Security Analyst** - Détecte les vulnérabilités potentielles
-3. **🏗️ Architect Blueprint** - Propose une architecture technique complète
+1. **🔍 Edge Case Detective** - Identifies all forgotten edge cases
+2. **🛡️ Security Analyst** - Detects potential vulnerabilities
+3. **🏗️ Architect Blueprint** - Proposes complete technical architecture
 
-### 📥 Entrée (Input)
+### 📥 Input
 
-Un ticket de développement simple, même vague :
-
-```
-Créer un système d'authentification utilisateur avec email et mot de passe.
-Les utilisateurs doivent pouvoir se connecter, se déconnecter et réinitialiser leur mot de passe.
-```
-
-### 📤 Sortie (Output)
-
-Une spécification technique complète avec :
-
-**Edge Cases identifiés :**
-- Que se passe-t-il si l'email existe déjà ?
-- Comment gérer les tentatives de connexion multiples échouées ?
-- Quelle est la politique d'expiration des tokens de réinitialisation ?
-- Comment traiter les emails invalides ou temporaires ?
-
-**Risques de sécurité détectés :**
-- Stockage des mots de passe (hashing bcrypt requis)
-- Protection contre les attaques par force brute
-- Validation et sanitisation des entrées
-- Conformité RGPD pour les données personnelles
-- Sécurisation des tokens de réinitialisation
-
-**Architecture proposée :**
-- Composants nécessaires (API, base de données, service email)
-- Endpoints API à créer (`POST /auth/login`, `POST /auth/register`, etc.)
-- Ordre d'implémentation étape par étape
-- Estimation de complexité (S/M/L/XL)
-- Nombre de jours estimés
-
-### 🎁 Ce que BobSpec vous permet
-
-✅ **Zéro ambiguïté** - Tous les cas limites sont identifiés
-✅ **Zéro surprise** - Les risques de sécurité sont anticipés
-✅ **Zéro bug de spec** - L'architecture est définie avant le code
-✅ **Gain de temps** - Moins d'allers-retours avec le PO
-✅ **Qualité accrue** - Spécifications complètes et professionnelles
-
-### ⚡ Comment ça fonctionne
+A simple development ticket, even vague:
 
 ```
-1. Vous collez votre ticket → Interface web simple
-2. BobSpec analyse → 3 agents IA en parallèle (watsonx.ai Granite)
-3. Vous obtenez la spec → Résultats en temps réel avec animations
-4. Vous exportez → Format Markdown prêt à partager
+Create a user authentication system with email and password.
+Users should be able to login, logout, and reset their password.
 ```
 
-**Temps d'analyse moyen :** 10-30 secondes
-**Technologie :** IBM watsonx.ai (modèle Granite 4H Small)
-**Agents parallèles :** Exécution simultanée pour rapidité maximale
+### 📤 Output
+
+A complete technical specification with:
+
+**Identified Edge Cases:**
+- What happens if the email already exists?
+- How to handle multiple failed login attempts?
+- What is the reset token expiration policy?
+- How to handle invalid or temporary emails?
+
+**Detected Security Risks:**
+- Password storage (bcrypt hashing required)
+- Protection against brute force attacks
+- Input validation and sanitization
+- GDPR compliance for personal data
+- Reset token security
+
+**Proposed Architecture:**
+- Required components (API, database, email service)
+- API endpoints to create (`POST /auth/login`, `POST /auth/register`, etc.)
+- Step-by-step implementation order
+- Complexity estimation (S/M/L/XL)
+- Estimated days
+
+### 🎁 What BobSpec Enables
+
+✅ **Zero ambiguity** - All edge cases identified
+✅ **Zero surprises** - Security risks anticipated
+✅ **Zero spec bugs** - Architecture defined before code
+✅ **Time savings** - Fewer back-and-forth with PO
+✅ **Increased quality** - Complete and professional specifications
+
+### ⚡ How It Works
+
+```
+1. Paste your ticket → Simple web interface
+2. BobSpec analyzes → 3 AI agents in parallel (watsonx.ai Granite)
+3. Get the spec → Real-time results with animations
+4. Export → Markdown format ready to share
+```
+
+**Average analysis time:** 10-30 seconds
+**Technology:** IBM watsonx.ai (Granite 4H Small model)
+**Parallel agents:** Simultaneous execution for maximum speed
 
 ---
 
