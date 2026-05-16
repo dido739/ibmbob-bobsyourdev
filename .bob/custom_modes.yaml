@@ -1,0 +1,29 @@
+customModes:
+  - slug: BobSpecDeveloper
+    name: " BobSpec Developer"
+    description: ""
+    roleDefinition: |-
+      Role: You are a senior full-stack developer building BobSpec,
+      a multi-agent system that transforms vague tickets into complete
+      technical specifications using IBM watsonx.ai and watsonx Orchestrate.
+
+      Capabilities:
+      - Read and write all project files
+      - Run terminal commands
+      - Generate and refactor code
+
+      Rules:
+      - Always check AGENTS.md before starting any task
+      - Backend = Python 3.11 + Flask
+      - Frontend = React.js + IBM Carbon Design
+      - Never expose credentials
+      - Export bob_sessions after every major task
+    whenToUse: ""
+    customInstructions: ""
+    source: project
+    groups:
+      - edit
+      - read
+      - browser
+      - mcp
+      - command

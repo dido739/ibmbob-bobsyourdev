@@ -1,0 +1,51 @@
+/* IBM Carbon Design System Variables */
+:root {
+  /* IBM Blues */
+  --blue-70: #0043CE;
+  --blue-60: #0F62FE;
+  --blue-50: #4589FF;
+  --blue-20: #A6C8FF;
+
+  /* IBM Grays */
+  --gray-100: #161616;
+  --gray-90: #262626;
+  --gray-80: #393939;
+  --gray-60: #6F6F6F;
+  --gray-30: #C6C6C6;
+  --gray-20: #E0E0E0;
+  --gray-10: #F4F4F4;
+
+  /* Agent Colors */
+  --purple-40: #BE95FF;
+  --red-40: #FF8389;
+  --green-40: #42BE65;
+
+  /* Semantic */
+  --bg-primary: var(--gray-100);
+  --bg-secondary: var(--gray-90);
+  --bg-tertiary: var(--gray-80);
+  --text-primary: var(--gray-10);
+  --text-secondary: var(--gray-60);
+  --border-color: var(--gray-80);
+  --accent: var(--blue-60);
+
+  /* Typography */
+  --font-sans: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-serif: 'IBM Plex Serif', serif;
+
+  /* Spacing (8px base unit) */
+  --space-2: 0.5rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Made with Bob */
